@@ -15,6 +15,8 @@ namespace Movies.Models
 
         public string Description { get; set; }
 
+        public bool Active { get; set; } = true;
+
         [Required]
         [Column(TypeName = "decimal(9,2)")]
         public decimal Quantity { get; set; }
