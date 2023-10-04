@@ -1,0 +1,24 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using Microsoft.AspNetCore.Identity
+@using Movies.Data;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if(SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result,"admin"))
+{
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+        <div class="dropdown-menu" style="">
+
+            <a class="dropdown-item" asp-controller="AdminCategory" asp-action="Index">Categories</a>
+            <a class="dropdown-item" asp-controller="AdminProduct" asp-action="Index">Products</a>
+
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" asp-controller="AdminOrder" asp-action="Orders">Orders</a>
+        </div>
+    </li>
+}

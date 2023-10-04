@@ -16,6 +16,7 @@ namespace Movies.Models
         public string Title { get; set; }
 
         [StringLength(500,MinimumLength = 2)]
+        [DataType(DataType.ImageUrl)]
         public string FileName { get; set; }
 
         [NotMapped]
