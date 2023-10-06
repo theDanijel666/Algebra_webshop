@@ -27,7 +27,7 @@ namespace Movies.Controllers
             if (id == null) return RedirectToAction("Index","AdminProduct");
             ViewBag.ProductId = id;
               return _context.ProductImage != null ? 
-                          View(await _context.ProductImage.ToListAsync()) :
+                          View(await _context.ProductImage.Where(x=> x.ProductId==id).ToListAsync()) : 
                           Problem("Entity set 'ApplicationDbContext.ProductImage'  is null.");
         }
 
