@@ -62,7 +62,8 @@
                             <tr>
                                 <td> @item.Price €</td>
                                 <td>
-                                    <form>
+                                    <form method="post" asp-controller="Cart" asp-action="AddToCart">
+                                        <input type="hidden" name="productId" value="@item.Id" />
                                         <input type="submit" class="btn btn-success btn-sm" value="Add to cart">
                                     </form>
                                 </td>
