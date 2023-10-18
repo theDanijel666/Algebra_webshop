@@ -103,6 +103,7 @@ ViewData["Title"] = "Order Page";
                 <div class="text-center">
                     <h5>Personal (billing) information</h5>
                 </div>
+                <input type="hidden" name="UserId" value="user" />
                 <input type="hidden" name="Total" value="@Model.Sum(x => x.Product.Price * x.Quantity).ToString("0.00")" />
                 <div class="row">
                     <div class="form-group col-md-6">
@@ -221,6 +222,14 @@ ViewData["Title"] = "Order Page";
                         var shippingcontainer = document.getElementById("shippingcontainer");
                         if(checkbox.checked == true){
                             shippingcontainer.style.display = "none";
+                            document.getElementById("ShippingFirstName").value = document.getElementById("BillingFirstName").value;
+                            document.getElementById("ShippingLastName").value = document.getElementById("BillingLastName").value;
+                            document.getElementById("ShippingEmail").value = document.getElementById("BillingEmail").value;
+                            document.getElementById("ShippingPhone").value = document.getElementById("BillingPhone").value;
+                            document.getElementById("ShippingAddress").value = document.getElementById("BillingAddress").value;
+                            document.getElementById("ShippingCity").value = document.getElementById("BillingCity").value;
+                            document.getElementById("ShippingPostalCode").value = document.getElementById("BillingPostalCode").value;
+                            document.getElementById("ShippingCountry").value = document.getElementById("BillingCountry").value;
                         }
                         else{
                             shippingcontainer.style.display = "block";
@@ -230,7 +239,7 @@ ViewData["Title"] = "Order Page";
                 <hr />
                 <div class="row">
                     <label for="Message">Message :</label>
-                    <textarea class="form-control" id="Message" name="Message" rows="5"></textarea>
+                    <textarea class="form-control" id="Message" name="Message" rows="5"> Poruka </textarea>
                 </div>
                 <br />
                 <div class="row">
