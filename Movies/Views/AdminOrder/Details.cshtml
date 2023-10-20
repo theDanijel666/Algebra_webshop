@@ -1,0 +1,91 @@
+﻿@model Movies.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.BillingFirstName) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.BillingLastName) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.BillingEmail) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.BillingPhone) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.BillingAddress) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.BillingCity) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.BillingPostalCode) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.BillingCountry) </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.BillingFirstName)</td>
+                <td>@Html.DisplayFor(model => model.BillingLastName)</td>
+                <td>@Html.DisplayFor(model => model.BillingEmail)</td>
+                <td>@Html.DisplayFor(model => model.BillingPhone)</td>
+                <td>@Html.DisplayFor(model => model.BillingAddress)</td>
+                <td>@Html.DisplayFor(model => model.BillingCity)</td>
+                <td>@Html.DisplayFor(model => model.BillingPostalCode)</td>
+                <td>@Html.DisplayFor(model => model.BillingCountry)</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.ShippingFirstName) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ShippingLastName) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ShippingEmail) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ShippingPhone) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ShippingAddress) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ShippingCity) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ShippingPostalCode) </th>
+                <th scope="col">@Html.DisplayNameFor(model => model.ShippingCountry) </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.ShippingFirstName)</td>
+                <td>@Html.DisplayFor(model => model.ShippingLastName)</td>
+                <td>@Html.DisplayFor(model => model.ShippingEmail)</td>
+                <td>@Html.DisplayFor(model => model.ShippingPhone)</td>
+                <td>@Html.DisplayFor(model => model.ShippingAddress)</td>
+                <td>@Html.DisplayFor(model => model.ShippingCity)</td>
+                <td>@Html.DisplayFor(model => model.ShippingPostalCode)</td>
+                <td>@Html.DisplayFor(model => model.ShippingCountry)</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Total) €
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+    </dl>
+    <partial name="_OrderItemsPartial" for="@Model.OrderItems" />
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
