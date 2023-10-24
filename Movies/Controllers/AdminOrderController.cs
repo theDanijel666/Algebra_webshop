@@ -21,6 +21,25 @@ namespace Movies.Controllers
             _context = context;
         }
 
+        private List<OrderItem> ItemsForOrder(int orderid)
+        {
+            return (
+                from order_item in _context.OrderItem
+                where order_item.OrderId == orderid
+                select new OrderItem
+                {
+                    Id = order_item.Id,
+                    OrderId = order_item.OrderId,
+                    ProductId = order_item.ProductId,
+                    Quantity = order_item.Quantity,
+                    Price = order_item.Price,
+                    ProductTitle = (from product in _context.Product
+                                    where product.Id == order_item.ProductId
+                                    select product.Title).FirstOrDefault()
+                }
+                ).ToList();
+        }
+
         // GET: AdminOrder
         public async Task<IActionResult> Index()
         {
@@ -43,21 +62,7 @@ namespace Movies.Controllers
             {
                 return NotFound();
             }
-            order.OrderItems=(
-                from order_item in _context.OrderItem
-                where order_item.OrderId == order.Id
-                select new OrderItem
-                {
-                    Id=order_item.Id,
-                    OrderId=order_item.OrderId,
-                    ProductId=order_item.ProductId,
-                    Quantity=order_item.Quantity,
-                    Price=order_item.Price,
-                    ProductTitle=(from product in _context.Product
-                                  where product.Id==order_item.ProductId
-                                  select product.Title).FirstOrDefault()
-                }
-                ).ToList();
+            order.OrderItems=ItemsForOrder(order.Id);
 
             return View(order);
         }
@@ -75,6 +80,7 @@ namespace Movies.Controllers
             {
                 return NotFound();
             }
+            order.OrderItems = ItemsForOrder((int)id);
             return View(order);
         }
 
@@ -89,7 +95,7 @@ namespace Movies.Controllers
             {
                 return NotFound();
             }
-
+            ModelState.Remove("OrderItems");
             if (ModelState.IsValid)
             {
                 try
@@ -110,6 +116,7 @@ namespace Movies.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            order.OrderItems = ItemsForOrder((int)id);
             return View(order);
         }
 
@@ -127,7 +134,7 @@ namespace Movies.Controllers
             {
                 return NotFound();
             }
-
+            order.OrderItems = ItemsForOrder((int)id);
             return View(order);
         }
 
@@ -143,6 +150,11 @@ namespace Movies.Controllers
             var order = await _context.Order.FindAsync(id);
             if (order != null)
             {
+                foreach (var order_item in _context.OrderItem.Where(oi => oi.OrderId == order.Id))
+                {
+                    _context.Product.Find(order_item.ProductId).Quantity += order_item.Quantity;
+                    _context.OrderItem.Remove(order_item);
+                }
                 _context.Order.Remove(order);
             }
             
