@@ -10,23 +10,23 @@ namespace Movies.Data
     public class ApplicationUser : IdentityUser
     {
         [StringLength(100)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [StringLength(100)]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [StringLength(200)]
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         [StringLength(200)]
-        public string City { get; set; }
+        public string? City { get; set; }
 
         [StringLength(10)]
         [DataType(DataType.PostalCode)]
-        public string PostalCode { get; set; }
+        public string? PostalCode { get; set; }
 
         [StringLength(100)]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
 
         [ForeignKey("UserId")]
